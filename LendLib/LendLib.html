@@ -1,13 +1,95 @@
 <head>
-  <title>LendLib</title>
+  <title>My Lending Library</title>
 </head>
 
 <body>
-  {{> hello}}
+	<!-- Le styles -->
+    <style type="text/css">
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        margin: 60px 0;
+        text-align: center;
+      }
+      .jumbotron h1 {
+        font-size: 72px;
+        line-height: 1;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 60px 0;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+    </style>
+   
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="../assets/ico/favicon.png">
+  </head>
+
+  <body>
+    <div class="container-narrow">
+      <div class="masthead">
+      	<h3>My Lending Library</h3>
+      </div>
+
+      <hr/>
+
+ 			<div class="content">
+ 				<div id="categories" class="btn-group">
+					{{> categories }}
+				</div>
+ 			</div>
+
+      <hr/>
+
+      <div class="footer">
+        <p style="text-align:center;">&copy; Copyleft 2013 - Grupo WebLovers - Por uma web mais apaixonante. <br /> 
+        
+        <span style="font-size:11px;">
+          Desenvolvimento: <a href="http://www.grupoweblovers.org" target="_blank">Grupo WebLovers - Por uma Web mais apaixonante!</a><br />
+          Powered By: <a href="http://meteor.js" target="_blank">Meteor.js</a> / <a href="http://twitter.github.com/bootstrap" target="_blank">Twitter Bootstrap</a><br />
+        </span> 
+        
+        </p>
+      </div>
+
+    </div> <!-- /container -->
 </body>
 
-<template name="hello">
-  <h1>Hello World!</h1>
-  {{greeting}}
-  <input type="button" value="Click" />
+<template name="categories">
+  {{#if new_cat}}
+    <div class="category"><input type="text" id="add-category" value="" /></div>
+  {{else}}
+    <div class="category btn btn-inverse" id="btnNewCat">&plus;</div>
+  {{/if}}
+          
+	{{#each lists}}
+		<div class="category btn btn-inverse">
+		{{Category}}
+		</div>
+	{{/each}}
 </template>
