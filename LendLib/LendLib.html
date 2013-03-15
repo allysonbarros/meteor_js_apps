@@ -51,33 +51,38 @@
   </head>
 
   <body>
-    <div class="container-narrow">
-      <div class="masthead">
-      	<h3>My Lending Library</h3>
-      </div>
+    <div id="lendlib">
+      <div class="container-narrow">
+        <div class="masthead">
+        	<h3>My Lending Library</h3>
+        </div>
 
-      <hr/>
+        <hr/>
 
- 			<div class="content">
- 				<div id="categories" class="btn-group">
-					{{> categories }}
-				</div>
- 			</div>
+   			<div class="content">
+   				<div id="categories" class="btn-group">
+  					{{> categories }}
+  				</div>
 
-      <hr/>
+          <div id="list">
+            {{> list}}
+          </div>
+   			</div>
 
-      <div class="footer">
-        <p style="text-align:center;">&copy; Copyleft 2013 - Grupo WebLovers - Por uma web mais apaixonante. <br /> 
-        
-        <span style="font-size:11px;">
-          Desenvolvimento: <a href="http://www.grupoweblovers.org" target="_blank">Grupo WebLovers - Por uma Web mais apaixonante!</a><br />
-          Powered By: <a href="http://meteor.js" target="_blank">Meteor.js</a> / <a href="http://twitter.github.com/bootstrap" target="_blank">Twitter Bootstrap</a><br />
-        </span> 
-        
-        </p>
-      </div>
+        <hr/>
 
-    </div> <!-- /container -->
+        <div class="footer">
+          <p style="text-align:center;">&copy; Copyleft 2013 - Grupo WebLovers - Por uma web mais apaixonante. <br /> 
+          
+          <span style="font-size:11px;">
+            Desenvolvimento: <a href="http://www.grupoweblovers.org" target="_blank">Grupo WebLovers - Por uma Web mais apaixonante!</a><br />
+            Powered By: <a href="http://meteor.js" target="_blank">Meteor.js</a> / <a href="http://twitter.github.com/bootstrap" target="_blank">Twitter Bootstrap</a><br />
+          </span> 
+          
+          </p>
+        </div>
+      </div> <!-- /container -->
+    </div>
 </body>
 
 <template name="categories">
@@ -86,10 +91,40 @@
   {{else}}
     <div class="category btn btn-inverse" id="btnNewCat">&plus;</div>
   {{/if}}
-          
+
 	{{#each lists}}
 		<div class="category btn btn-inverse">
 		{{Category}}
 		</div>
 	{{/each}}
+</template>
+
+<template name="list">
+  <ul id="lending_list">
+    {{#each items}}
+      <li class="lending_item alert">
+        <button type="button" class="close delete_item" id="{{name}}">x</button>
+
+        {{Name}}
+
+        {{#if lendee_editing}}
+          <input type="text" id="edit_lendee" class="span2 pull-right" value=""/>
+        {{else}}
+          <div class="lendee pull-right label {{LendClass}}">
+            {{Lendee}}
+          </div>
+        {{/if}}
+
+        {{#if list_selected}}
+          <li class="alert-success" id="btnAddItem">
+            &plus;
+
+            {{#if list_adding}}
+              <input class="span4" id="item_to_add" size="32" type="text">
+            {{/if}}
+          </li>
+        {{/if}}
+      </li>
+    {{/each}}
+  </ul>
 </template>

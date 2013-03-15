@@ -5,6 +5,23 @@ if (Meteor.isClient) {
     return lists.find({}, {sort: {Category: 1}});
   };
 
+  Template.list.items = function() {
+  	if (Session.equals('current_list', null))
+  		return null;
+  	else {
+  		var cats = lists.findOne({_id:Session.get('current_list')});
+  		if (cats && cats.items) {
+  			for (var i = 0; i < cats.items.lenght; i++) {
+  				var d = cats.items[i];
+  				d.Lendee = d.LentTo ? d.LentoTo : "free";
+  				d.LendClass = d.LentTo ? : "label-important" : "label-success";
+  			};
+
+  			return cats.items;
+  		}
+  	}
+  };
+
   Session.set('adding_category', false);
 
   Template.categories.new_cat = function() {
