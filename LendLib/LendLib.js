@@ -17,7 +17,15 @@ if (Meteor.isClient) {
 
   		Meteor.flush();
   		focusText(t.find("#add-category"));
-  	}
+  	}, 'keyup #add-category': function (e,t) {
+			if (e.which === 13) {
+				var catVal = String(e.target.value || "");
+				if (catVal) {
+					lists.insert({Category:catVal});
+					Session.set('adding_category', false);
+				}
+			}
+		}
   });
 
   function focusText(i) {
